@@ -1,7 +1,3 @@
-/* ═══════════════════════════════════════════════════════
-   BOST-KSI IT HELP DESK — js/tickets.js
-   ═══════════════════════════════════════════════════════ */
-
 async function submitTicket() {
   const date     = document.getElementById('f-date').value;
   const time     = document.getElementById('f-time').value;
@@ -45,8 +41,8 @@ async function submitTicket() {
 }
 
 async function renderTickets() {
-  const q       = (document.getElementById('search-input')?.value || '').toLowerCase();
-  const tickets = await getAllTickets();
+  const q        = (document.getElementById('search-input')?.value || '').toLowerCase();
+  const tickets  = await getAllTickets();
   const filtered = tickets.filter(t =>
     Object.values(t).some(v => String(v).toLowerCase().includes(q))
   );
