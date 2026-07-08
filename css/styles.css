@@ -65,8 +65,10 @@ body::before {
   display: grid;
   place-items: center;
   padding: 24px;
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(21, 93, 252, 0.9));
-  z-index: 20;
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
 }
 
 .login-screen.hidden {
