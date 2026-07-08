@@ -75,6 +75,80 @@ body::before {
   display: none;
 }
 
+.signup-screen {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+}
+
+.signup-screen.hidden {
+  display: none;
+}
+
+.signup-card {
+  width: min(100%, 420px);
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.24);
+}
+
+.signup-brand {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.signup-brand h2 {
+  margin-top: 12px;
+  font-size: 24px;
+  color: var(--text);
+}
+
+.signup-brand p {
+  margin-top: 8px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.signup-btn {
+  margin-top: 8px;
+  width: 100%;
+}
+
+.signup-error {
+  min-height: 20px;
+  color: var(--danger);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: underline;
+  padding: 0;
+  font-size: inherit;
+}
+
+.link-btn:hover {
+  opacity: 0.8;
+}
+
 .login-card {
   width: min(100%, 420px);
   background: rgba(255, 255, 255, 0.96);
