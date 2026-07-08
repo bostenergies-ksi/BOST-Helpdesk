@@ -80,7 +80,6 @@ function initNewTicketDefaults() {
   document.getElementById('f-time').value =
     `${pad(now.getHours())}:${pad(now.getMinutes())}`;
 }
-
 // ── INIT ──────────────────────────────────────────────────
 /**
  * Check if user is already logged in with a valid session.
@@ -97,23 +96,6 @@ function initializeApp() {
     showLoginScreen();
   }
 }
-
-// Run initialization when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeApp);
-} else {
-  initializeApp();
-}
-
-
-  // No one is logged in — check if any accounts exist
-  const users = getStoredUsers();
-  if (Object.keys(users).length === 0) {
-    showSignupScreen();
-  } else {
-    showLoginScreen();
-  }
-
 
 // Run initialization when DOM is ready
 if (document.readyState === 'loading') {
