@@ -3,6 +3,41 @@
    App entry point: navigation, init, toast utility
    ═══════════════════════════════════════════════════════ */
 
+// ── AUTHENTICATION ─────────────────────────────────────
+function showLoginScreen() {
+  document.getElementById('login-screen').classList.remove('hidden');
+  document.getElementById('app-shell').classList.add('hidden');
+  document.getElementById('login-form').reset();
+  document.getElementById('login-error').textContent = '';
+}
+
+function showAppShell() {
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('app-shell').classList.remove('hidden');
+  initNewTicketDefaults();
+  navigate('dashboard');
+}
+
+function handleLogin(event) {
+  event.preventDefault();
+  const username = document.getElementById('login-username').value.trim();
+  const password = document.getElementById('login-password').value;
+  const errorEl = document.getElementById('login-error');
+
+  if (username === 'admin' && password === 'bost123') {
+    errorEl.textContent = '';
+    showAppShell();
+    showToast('Welcome back');
+  } else {
+    errorEl.textContent = 'Invalid username or password. Try admin / bost123.';
+  }
+}
+
+function logout() {
+  showLoginScreen();
+  showToast('You have been logged out');
+}
+
 // ── NAVIGATION ───────────────────────────────────────────
 /**
  * Switch to a named view and update sidebar highlight.
@@ -82,5 +117,4 @@ function initNewTicketDefaults() {
 }
 
 // ── INIT ──────────────────────────────────────────────────
-initNewTicketDefaults();
-navigate('dashboard');
+showLoginScreen();
