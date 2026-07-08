@@ -82,9 +82,31 @@ function initNewTicketDefaults() {
 }
 
 // ── INIT ──────────────────────────────────────────────────
-const users = getStoredUsers();
-if (Object.keys(users).length === 0) {
-  showSignupScreen();
+/**
+ * Check if user is already logged in. If so, show dashboard.
+ * Otherwise, decide whether to show signup or login screen.
+ */
+function initializeApp() {
+  const currentUser = sessionStorage.getItem('bost_current_user');
+  
+  // User is already logged in
+  if (currentUser) {
+    showAppShell();
+    return;
+  }
+
+  // No one is logged in — check if any accounts exist
+  const users = getStoredUsers();
+  if (Object.keys(users).length === 0) {
+    showSignupScreen();
+  } else {
+    showLoginScreen();
+  }
+}
+
+// Run initialization when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeApp);
 } else {
-  showLoginScreen();
+  initializeApp();
 }
