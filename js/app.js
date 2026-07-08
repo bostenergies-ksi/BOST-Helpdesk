@@ -83,17 +83,28 @@ function initNewTicketDefaults() {
 
 // ── INIT ──────────────────────────────────────────────────
 /**
- * Check if user is already logged in. If so, show dashboard.
- * Otherwise, decide whether to show signup or login screen.
+ * Check if user is already logged in with a valid session.
+ * Otherwise, show the login screen.
  */
 function initializeApp() {
   const currentUser = sessionStorage.getItem('bost_current_user');
-  
-  // User is already logged in
-  if (currentUser) {
+  const token = sessionStorage.getItem('bost_token');
+
+  // Only count as logged in if BOTH the username and token exist
+  if (currentUser && token) {
     showAppShell();
-    return;
+  } else {
+    showLoginScreen();
   }
+}
+
+// Run initialization when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+  initializeApp();
+}
+
 
   // No one is logged in — check if any accounts exist
   const users = getStoredUsers();
@@ -102,7 +113,7 @@ function initializeApp() {
   } else {
     showLoginScreen();
   }
-}
+
 
 // Run initialization when DOM is ready
 if (document.readyState === 'loading') {
