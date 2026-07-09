@@ -180,6 +180,17 @@ body::before {
   gap: 12px;
 }
 
+.login-form .form-group label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.login-form .form-group label i {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
 .login-btn {
   margin-top: 8px;
   width: 100%;
