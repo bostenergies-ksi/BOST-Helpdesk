@@ -82,21 +82,25 @@ function initNewTicketDefaults() {
 }
 // ── INIT ──────────────────────────────────────────────────
 /**
- * Check if user is already logged in with a valid session.
+ * Check if user is already logged in.
  * Otherwise, show the login screen.
  */
 function initializeApp() {
-  const currentUser = sessionStorage.getItem('bost_current_user');
-  const token = sessionStorage.getItem('bost_token');
+  const loggedIn = sessionStorage.getItem('bost_logged_in');
 
-  // Only count as logged in if BOTH the username and token exist
-  if (currentUser && token) {
+  if (loggedIn === 'true') {
     showAppShell();
   } else {
     showLoginScreen();
   }
 }
 
+// Run initialization when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+  initializeApp();
+}
 // Run initialization when DOM is ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initializeApp);
