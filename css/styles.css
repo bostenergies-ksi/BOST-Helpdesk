@@ -812,9 +812,112 @@ tbody td {
     height: auto;
   }
 
+  .app-shell {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+
   #sidebar {
     width: 100%;
     min-width: 100%;
+    flex-direction: row;
+    align-items: center;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12);
+  }
+
+  .sidebar-logo {
+    padding: 10px 12px;
+    border-bottom: none;
+  }
+
+  .sidebar-logo span {
+    display: none;
+  }
+
+  .logo-box {
+    width: 38px;
+    height: 38px;
+  }
+
+  .logo-box img {
+    width: 32px;
+  }
+
+  .nav-menu {
+    display: flex;
+    flex: 1;
+    padding: 8px;
+    overflow-x: auto;
+    gap: 4px;
+  }
+
+  .nav-item {
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 12px;
+    margin: 0;
+    font-size: 11px;
+    white-space: nowrap;
+    border-left: none;
+  }
+
+  .nav-item.active {
+    border-left: none;
+    box-shadow: none;
+  }
+
+  #main {
+    flex: none;
+    width: 100%;
+  }
+
+  .topbar {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 12px 16px;
+    gap: 10px;
+  }
+
+  .topbar h1 {
+    font-size: 15px;
+    width: 100%;
+  }
+
+  .topbar-actions {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  #content {
+    padding: 16px;
+  }
+
+  .stat-cards {
+    gap: 10px;
+  }
+
+  .stat-card {
+    min-width: calc(50% - 5px);
+    padding: 14px 10px;
+  }
+
+  .stat-card .value {
+    font-size: 22px;
+  }
+
+  .charts-row {
+    flex-direction: column;
+  }
+
+  .chart-card {
+    min-width: 100%;
+  }
+
+  .form-card,
+  .reports-card {
+    padding: 18px;
   }
 
   .footer {
