@@ -39,3 +39,17 @@ async function updateTicket(ticket) {
     return { success: false };
   }
 }
+
+async function deleteTicket(id) {
+  try {
+    const res = await fetch(API_URL, {
+      method: "POST",
+      body: JSON.stringify({ action: "deleteTicket", id })
+    });
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.error("Failed to delete ticket:", err);
+    return { success: false };
+  }
+}

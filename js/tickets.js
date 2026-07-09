@@ -76,6 +76,7 @@ async function renderTickets() {
       <td>
         <div class="action-btns">
           <button class="btn-edit" onclick="openEdit('${t.id}')">Edit</button>
+          <button class="btn-delete" onclick="handleDelete('${t.id}')">Delete</button>
         </div>
       </td>
     </tr>
@@ -152,5 +153,20 @@ async function saveEdit() {
     showToast('✓ Ticket updated');
   } else {
     showToast('❌ Failed to update ticket');
+  }
+}
+
+async function handleDelete(id) {
+  const confirmed = confirm('Are you sure you want to delete this ticket? This cannot be undone.');
+  if (!confirmed) return;
+
+  showToast('Deleting...');
+  const result = await deleteTicket(id);
+
+  if (result.success) {
+    renderTickets();
+    showToast('✓ Ticket deleted');
+  } else {
+    showToast('❌ Failed to delete ticket');
   }
 }
