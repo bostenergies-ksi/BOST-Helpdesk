@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BOST-KSI IT Help Desk</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/styles.css?v=2" />
 </head>
 <body>
 
@@ -21,9 +21,9 @@
       </div>
       <form id="login-form" class="login-form" onsubmit="handleLogin(event)">
         <div class="form-group">
-          <label for="login-username">Username</label>
-          <input type="text" id="login-username" placeholder="Enter username" required />
-        </div>
+  <label>Username</label>
+  <input type="text" value="admin" disabled />
+</div>
         <div class="form-group">
           <label for="login-password">Password</label>
           <input type="password" id="login-password" placeholder="Enter password" required />
@@ -290,13 +290,13 @@
   <!-- Footer -->
   <div class="footer">© 2026 BOST KSI-IT Help Desk System</div>
 
-  <!-- JavaScript Modules -->
-  <script src="js/db.js"></script>
-  <script src="js/login.js"></script>
-  <script src="js/dashboard.js"></script>
-  <script src="js/tickets.js"></script>
-  <script src="js/reports.js"></script>
-  <script src="js/app.js"></script>
+<!-- JavaScript Modules -->
+  <script src="js/db.js?v=2"></script>
+  <script src="js/login.js?v=2"></script>
+  <script src="js/dashboard.js?v=2"></script>
+  <script src="js/tickets.js?v=2"></script>
+  <script src="js/reports.js?v=2"></script>
+  <script src="js/app.js?v=2"></script>
 
 </body>
 </html>
