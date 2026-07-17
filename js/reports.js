@@ -80,7 +80,7 @@ function buildReportPreviewHtml(filtered, from, to, resolved, pending, incomplet
                   <td><span class="badge badge-${escapeHtml(t.status.toLowerCase())}">${escapeHtml(t.status)}</span></td>
                   <td><span class="badge badge-${escapeHtml(t.priority.toLowerCase())}">${escapeHtml(t.priority)}</span></td>
                   <td>${escapeHtml(t.assigned_to)}</td>
-                  <td>${escapeHtml(t.time_resolved)}</td>
+                  <td>${escapeHtml(formatDateTime(t.time_resolved))}</td>
                   <td>${escapeHtml(t.comments)}</td>
                 </tr>
               `).join('')}
@@ -105,7 +105,7 @@ function buildReportDocument(filtered, from, to, resolved, pending, incomplete) 
       <td><span class="status-pill status-${escapeHtml(t.status.toLowerCase())}">${escapeHtml(t.status)}</span></td>
       <td><span class="priority-${escapeHtml(t.priority.toLowerCase())}">${escapeHtml(t.priority)}</span></td>
       <td>${escapeHtml(t.assigned_to)}</td>
-      <td>${escapeHtml(t.time_resolved)}</td>
+      <td>${escapeHtml(formatDateTime(t.time_resolved))}</td>
       <td>${escapeHtml(t.comments)}</td>
     </tr>
   `).join('');

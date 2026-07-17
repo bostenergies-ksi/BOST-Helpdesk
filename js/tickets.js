@@ -71,7 +71,7 @@ async function renderTickets() {
       <td><span class="badge badge-${t.status.toLowerCase()}">${t.status}</span></td>
       <td><span class="badge badge-${t.priority.toLowerCase()}">${t.priority}</span></td>
       <td>${t.assigned_to}</td>
-      <td>${t.time_resolved}</td>
+      <td>${formatDateTime(t.time_resolved)}</td>
       <td>${t.comments}</td>
       <td>
         <div class="action-btns">
@@ -110,7 +110,7 @@ async function openEdit(id) {
   document.getElementById('m-assigned').value      = t.assigned_to;
   document.getElementById('m-status').value        = t.status;
   document.getElementById('m-resolution').value    = t.resolution;
-  document.getElementById('m-time-resolved').value = toDateTimeLocalValue(t.time_resolved);
+  document.getElementById('m-time-resolved').value = toDateTimeLocalValue(formatDateTime(t.time_resolved));
   document.getElementById('m-comments').value      = t.comments;
 
   document.getElementById('modal-overlay').classList.remove('hidden');

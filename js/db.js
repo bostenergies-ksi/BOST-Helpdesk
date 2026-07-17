@@ -1,5 +1,14 @@
 const API_URL = "https://script.google.com/macros/s/AKfycbzcfhUkuz5h5V5qn0iJroJplzvmiKhSDAAgyEBd0AwhNGXwSXGnsmv6gKcdnYHZ9de9/exec";
 
+function formatDateTime(value) {
+  if (!value) return '';
+  const iso = String(value).match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/);
+  if (iso) {
+    return `${iso[1]}-${iso[2]}-${iso[3]} ${iso[4]}:${iso[5]}:${iso[6]}`;
+  }
+  return value;
+}
+
 async function getAllTickets() {
   try {
     const res = await fetch(API_URL);
