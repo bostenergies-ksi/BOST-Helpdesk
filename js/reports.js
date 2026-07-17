@@ -74,13 +74,13 @@ function buildReportPreviewHtml(filtered, from, to, resolved, pending, incomplet
                   <td><strong>${escapeHtml(t.id)}</strong></td>
                   <td>${escapeHtml(t.date)}</td>
                   <td>${escapeHtml(t.reporter)}</td>
-                  <td>${escapeHtml(t.dept)}</td>
+                  <td>${escapeHtml(t.department)}</td>
                   <td>${escapeHtml(t.issue)}</td>
                   <td>${escapeHtml(t.resolution)}</td>
                   <td><span class="badge badge-${escapeHtml(t.status.toLowerCase())}">${escapeHtml(t.status)}</span></td>
                   <td><span class="badge badge-${escapeHtml(t.priority.toLowerCase())}">${escapeHtml(t.priority)}</span></td>
-                  <td>${escapeHtml(t.assigned)}</td>
-                  <td>${escapeHtml(t.timeResolved)}</td>
+                  <td>${escapeHtml(t.assigned_to)}</td>
+                  <td>${escapeHtml(t.time_resolved)}</td>
                   <td>${escapeHtml(t.comments)}</td>
                 </tr>
               `).join('')}
@@ -99,13 +99,13 @@ function buildReportDocument(filtered, from, to, resolved, pending, incomplete) 
       <td>${escapeHtml(t.date)}</td>
       <td>${escapeHtml(t.time)}</td>
       <td>${escapeHtml(t.reporter)}</td>
-      <td>${escapeHtml(t.dept)}</td>
+      <td>${escapeHtml(t.department)}</td>
       <td>${escapeHtml(t.issue)}</td>
       <td>${escapeHtml(t.resolution)}</td>
       <td>${escapeHtml(t.status)}</td>
       <td>${escapeHtml(t.priority)}</td>
-      <td>${escapeHtml(t.assigned)}</td>
-      <td>${escapeHtml(t.timeResolved)}</td>
+      <td>${escapeHtml(t.assigned_to)}</td>
+      <td>${escapeHtml(t.time_resolved)}</td>
       <td>${escapeHtml(t.comments)}</td>
     </tr>
   `).join('');
