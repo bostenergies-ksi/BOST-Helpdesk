@@ -95,15 +95,15 @@ function buildReportPreviewHtml(filtered, from, to, resolved, pending, incomplet
 function buildReportDocument(filtered, from, to, resolved, pending, incomplete) {
   const rows = filtered.map(t => `
     <tr>
-      <td>${escapeHtml(t.id)}</td>
+      <td><strong>${escapeHtml(t.id)}</strong></td>
       <td>${escapeHtml(t.date)}</td>
       <td>${escapeHtml(t.time)}</td>
       <td>${escapeHtml(t.reporter)}</td>
       <td>${escapeHtml(t.department)}</td>
       <td>${escapeHtml(t.issue)}</td>
       <td>${escapeHtml(t.resolution)}</td>
-      <td>${escapeHtml(t.status)}</td>
-      <td>${escapeHtml(t.priority)}</td>
+      <td><span class="status-pill status-${escapeHtml(t.status.toLowerCase())}">${escapeHtml(t.status)}</span></td>
+      <td><span class="priority-${escapeHtml(t.priority.toLowerCase())}">${escapeHtml(t.priority)}</span></td>
       <td>${escapeHtml(t.assigned_to)}</td>
       <td>${escapeHtml(t.time_resolved)}</td>
       <td>${escapeHtml(t.comments)}</td>
@@ -111,8 +111,8 @@ function buildReportDocument(filtered, from, to, resolved, pending, incomplete) 
   `).join('');
 
   const fromDate = new Date(from);
-  const toDate = new Date(to);
   const monthName = fromDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  const generatedStamp = new Date().toLocaleString();
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -121,10 +121,11 @@ function buildReportDocument(filtered, from, to, resolved, pending, incomplete) 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IT Help Desk Report</title>
   <style>
+    * { box-sizing: border-box; }
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: 'Segoe UI', Arial, sans-serif;
       margin: 0;
-      padding: 20px;
+      padding: 24px;
       background: #fff;
       color: #1a1a1a;
       line-height: 1.5;
@@ -138,118 +139,160 @@ function buildReportDocument(filtered, from, to, resolved, pending, incomplete) 
     .report-header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 12px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #1a3a52;
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 3px solid #003d7a;
+      margin-bottom: 14px;
     }
-    .header-left h1 {
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .report-logo {
+      width: 52px;
+      height: auto;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+    .header-brand h1 {
       font-size: 18px;
-      font-weight: 700;
-      color: #2563eb;
+      font-weight: 800;
+      color: #003d7a;
       margin: 0 0 2px;
     }
-    .header-left p {
-      font-size: 12px;
-      color: #666;
+    .header-brand p {
+      font-size: 11px;
+      color: #64748b;
       margin: 0;
     }
     .header-right {
       text-align: right;
       font-size: 12px;
-      color: #333;
+      color: #334155;
     }
-    .header-right div {
-      margin-bottom: 2px;
+    .header-right .range {
+      font-weight: 700;
+      color: #003d7a;
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+    .header-right .generated {
+      color: #94a3b8;
+      font-size: 10.5px;
     }
     .title-section {
       text-align: center;
-      margin: 10px 0;
+      margin: 16px 0 14px;
     }
     .title-section h2 {
       font-size: 18px;
-      font-weight: 700;
-      margin: 0 0 4px;
-      color: #000;
+      font-weight: 800;
+      margin: 0;
+      color: #0f172a;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-    .title-section .subtitle {
-      font-size: 12px;
-      color: #666;
-      margin: 0;
+    .title-underline {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #003d7a, #2563eb);
+      margin: 8px auto 0;
+      border-radius: 2px;
     }
-    .divider {
-      border-top: 2px solid #000;
-      margin: 8px 0;
+    .info-band {
+      display: flex;
+      margin: 14px 0;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #dbe4f0;
     }
-    .info-section {
-      margin: 12px 0;
-      padding: 10px;
-      background: #f8f9fa;
-      border-left: 4px solid #2563eb;
+    .info-cell {
+      flex: 1;
+      padding: 10px 14px;
+      background: #f8fafc;
+      border-right: 1px solid #e2e8f0;
     }
-    .info-section .info-row {
-      margin: 4px 0;
-      font-size: 12px;
+    .info-cell:last-child { border-right: none; }
+    .info-cell .k {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 3px;
     }
-    .info-row strong {
+    .info-cell .v {
+      font-size: 12.5px;
       font-weight: 700;
-      color: #1a1a1a;
+      color: #0f172a;
+    }
+    .definition-box {
+      margin: 12px 0 18px;
+      padding: 12px 14px;
+      background: #f8fafc;
+      border-left: 4px solid #003d7a;
+      border-radius: 0 8px 8px 0;
+      font-size: 11.5px;
+      color: #475569;
+    }
+    .definition-box strong {
+      display: block;
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #003d7a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 12px;
+      margin-top: 8px;
       font-size: 11px;
     }
     th {
       background: #003d7a;
       color: #fff;
       font-weight: 700;
-      padding: 8px 5px;
+      padding: 8px 6px;
       text-align: left;
       border: 1px solid #003d7a;
       word-wrap: break-word;
       min-width: 50px;
     }
     td {
-      padding: 6px 5px;
-      border: 1px solid #ccc;
+      padding: 7px 6px;
+      border: 1px solid #eef2f7;
       text-align: left;
       word-wrap: break-word;
       vertical-align: top;
+      color: #334155;
     }
     tr:nth-child(even) td {
-      background: #f5f5f5;
+      background: #f8fafc;
     }
-    tr:hover td {
-      background: #f0f0f0;
-    }
-    .summary-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin: 12px 0;
-    }
-    .summary-card {
-      border: 1px solid #ddd;
-      padding: 8px;
-      background: #f5f5f5;
-      text-align: center;
-      font-size: 11px;
-    }
-    .summary-card .label {
-      font-weight: 700;
-      color: #666;
+    .status-pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
       font-size: 10px;
-      text-transform: uppercase;
-      margin-bottom: 4px;
+      font-weight: 800;
     }
-    .summary-card .value {
-      font-size: 20px;
-      font-weight: 700;
-      color: #003d7a;
+    .status-resolved   { background: #dcfce7; color: #166534; }
+    .status-pending    { background: #fef3c7; color: #92400e; }
+    .status-incomplete { background: #fee2e2; color: #991b1b; }
+    .priority-high   { color: #b91c1c; font-weight: 700; }
+    .priority-medium { color: #b45309; font-weight: 700; }
+    .priority-low    { color: #166534; font-weight: 700; }
+    .report-footer {
+      margin-top: 20px;
+      padding-top: 10px;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: #94a3b8;
     }
     @media print {
       body { background: #fff; padding: 20px; margin: 0; }
@@ -261,28 +304,44 @@ function buildReportDocument(filtered, from, to, resolved, pending, incomplete) 
 <body>
   <div class="report-sheet">
     <div class="report-header">
-      <div class="header-left">
-        <h1>BOST-KSI IT HELP DESK</h1>
-        <p>Bulk Energy Storage & Transportation Ltd. Co</p>
+      <div class="header-brand">
+        <img src="images/Bost_energies_logo.png" alt="BOST Energies" class="report-logo" />
+        <div>
+          <h1>BOST-KSI IT HELP DESK</h1>
+          <p>Bulk Energy Storage &amp; Transportation Ltd. Co</p>
+        </div>
       </div>
       <div class="header-right">
-        <div><strong>From:</strong> ${escapeHtml(from)}</div>
-        <div><strong>To:</strong> ${escapeHtml(to)}</div>
+        <div class="range">${escapeHtml(from)} &nbsp;→&nbsp; ${escapeHtml(to)}</div>
+        <div class="generated">Generated ${generatedStamp}</div>
       </div>
     </div>
 
     <div class="title-section">
-      <h2>IT. INCIDENT REPORTS FOR KUMASI DEPOT</h2>
-      <div class="divider"></div>
+      <h2>IT Incident Reports for Kumasi Depot</h2>
+      <div class="title-underline"></div>
     </div>
 
-    <div class="info-section">
-      <div class="info-row"><strong>MONTH:</strong> ${monthName}</div>
-      <div class="info-row"><strong>DATE:</strong> ${escapeHtml(from)} TO ${escapeHtml(to)}</div>
-      <div class="info-row" style="margin-top: 6px;"><strong>DEFINITION:</strong></div>
-      <div style="font-size: 12px; color: #555; margin-top: 2px;">The period within which IT systems are down and unable to function at The Kumasi Depot. The difference in time recorded when the system is down and when it gets back up, measured in hours.</div>
+    <div class="info-band">
+      <div class="info-cell">
+        <div class="k">Month</div>
+        <div class="v">${monthName}</div>
+      </div>
+      <div class="info-cell">
+        <div class="k">Date Range</div>
+        <div class="v">${escapeHtml(from)} to ${escapeHtml(to)}</div>
+      </div>
+      <div class="info-cell">
+        <div class="k">Total Tickets</div>
+        <div class="v">${filtered.length}</div>
+      </div>
     </div>
-    
+
+    <div class="definition-box">
+      <strong>Definition</strong>
+      The period within which IT systems are down and unable to function at The Kumasi Depot. The difference in time recorded when the system is down and when it gets back up, measured in hours.
+    </div>
+
     <table>
       <thead>
         <tr>
@@ -302,6 +361,11 @@ function buildReportDocument(filtered, from, to, resolved, pending, incomplete) 
       </thead>
       <tbody>${rows}</tbody>
     </table>
+
+    <div class="report-footer">
+      <div>BOST-KSI IT Help Desk System</div>
+      <div>© 2026 BOST KSI-IT Help Desk</div>
+    </div>
   </div>
 
   <script>
