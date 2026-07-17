@@ -671,6 +671,16 @@ tbody td {
   flex: 0 0 auto;
 }
 
+.reports-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.reports-actions .btn {
+  padding: 8px 14px;
+}
+
 .report-table-wrap {
   margin-top: 24px;
   overflow: auto;
@@ -937,3 +947,12 @@ tbody td {
   }
 }
 
+.reports-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.reports-actions .btn {
+  padding: 8px 14px;
+}
