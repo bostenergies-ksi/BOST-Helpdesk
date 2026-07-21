@@ -712,11 +712,13 @@ tbody td {
   border-radius: 18px;
   width: 520px;
   max-width: 96vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
   box-shadow: 0 24px 70px rgba(2, 6, 23, 0.24);
   overflow: hidden;
   border: 1px solid var(--border);
 }
-
 .modal-header {
   background: linear-gradient(90deg, #111c33 0%, #172444 100%);
   color: #fff;
@@ -745,8 +747,9 @@ tbody td {
 
 .modal-body {
   padding: 22px 20px;
+  overflow-y: auto;
+  flex: 1;
 }
-
 .modal-body .form-group {
   margin-bottom: 14px;
 }
@@ -761,6 +764,7 @@ tbody td {
   justify-content: flex-end;
   gap: 10px;
   border-top: 1px solid #e2e8f0;
+  flex-shrink: 0;
 }
 
 .mark-resolved-row {
